@@ -1,48 +1,71 @@
-<script type="text/javascript">
-    import { onMount } from 'svelte';
+<script lang="ts">
     import { CupNames, CupImages, CupMaps, CustomMaps } from '../stores';
-  import { C } from '$lib/assets';
+    // import pixeled from '../lib/fonts/pixeled.ttf';
+    import left from '$lib/assets/svgs/caret-left-fill.svg';
+    import right from '$lib/assets/svgs/caret-right-fill.svg';
 
-    onMount(() => {
-
-    });
-    function LocalList(name) {return JSON.parse(localStorage.getItem(name))}
+    // function LocalList(name) {return JSON.parse(localStorage.getItem(name))}
     let name = "";
     let maps = "";
     let image = "";
-    function SaveConfig(){
-        let cupNames = [];
-        CupNames.subscribe(value => cupNames = JSON.parse(value));
-        cupNames.push(name);
-        $CupNames = (JSON.stringify(cupNames));
 
-        let cupMaps = [];
-        CupMaps.subscribe(value => cupMaps = JSON.parse(value));
+    let cupNames = [];
+    CupNames.subscribe(value => {
+        // console.log(typeof value, value.length !== 0);
+        if (value.length !== 0) {
+            cupNames = JSON.parse(value);
+        }
+    });
+
+    let cupMaps = [];
+    CupMaps.subscribe(value => {
+        if (value.length !== 0) {
+            cupMaps = JSON.parse(value);
+        }
+    });
+
+    let cupImages = [];
+    CupImages.subscribe(value => {
+        if (value.length !== 0) {
+            cupImages = JSON.parse(value);
+        }
+    });
+
+    let customMaps = [];
+    CustomMaps.subscribe(value => {
+        if (value.length !== 0) {
+            customMaps = JSON.parse(value);
+        }
+    });
+
+    function SaveConfig(){
+        cupNames.push(name);
+        CupNames.set(JSON.stringify(cupNames));
+
         cupMaps.push(maps.replace(/\s/g, ""));
-        $CupMaps = JSON.stringify(cupMaps);
+        CupMaps.set(JSON.stringify(cupMaps));
 
         var reader = new FileReader();
         reader.onload = function(){
             var base64 = reader.result;
-            let cupImages = [];
-            CupImages.subscribe(value => cupImages = JSON.parse(value));
             cupImages.push(base64);
-            $CupImages = JSON.stringify(cupImages);
+            CupImages.set(JSON.stringify(cupImages));
         };
         reader.readAsDataURL(image);
-        window.location.reload();
+        // window.location.reload();
     }
 
     // rewrite with {#each} later
-    const Cupmenu = document.getElementById("0");
-    function GetCustomCups(){
-        for (let i = 0; i < LocalList("CupNames").length; i++){ {
-            Cupmenu.innerHTML += "<div style='padding:5px;border: 2px solid #1e1e1e;border-radius: 5px;width:10vw;height:10vw; background-image: url("+LocalList("CupImages")[i]+");background-size: cover;'><p style='padding:2px;border:2px solid #bbbbbb;background: #8A0468;border-radius: 5px;position:relative;top:20%;width-min:50%;font-size:70%;width:fit-content;overflow-wrap: break-word;'>"+LocalList("CupNames")[i]+"</p></div>";
-        }}
-    }
+    // const Cupmenu = document.getElementById("0");
+    // function GetCustomCups(){
+    //     for (let i = 0; i < LocalList("CupNames").length; i++){ {
+    //         Cupmenu.innerHTML += "<div style='padding:5px;border: 2px solid #1e1e1e;border-radius: 5px;width:10vw;height:10vw; background-image: url("+LocalList("CupImages")[i]+");background-size: cover;'><p style='padding:2px;border:2px solid #bbbbbb;background: #8A0468;border-radius: 5px;position:relative;top:20%;width-min:50%;font-size:70%;width:fit-content;overflow-wrap: break-word;'>"+LocalList("CupNames")[i]+"</p></div>";
+    //     }}
+    // }
 
     // GetCustomCups();
     let ExportImport = "";
+    let CupExport = 0;
     function exportCup() {
         let CupMaps = 0;
         let ExportName = JSON.parse(cupNames)[CupMaps];
@@ -54,65 +77,68 @@
         ExportImport = JSON.stringify([Export]);
     }
     function importCup() {
-        let Import = JSON.parse(document.getElementById('exportimport').value);
+        let Import = JSON.parse(ExportImport);
         console.log(Import);
         let ImportName = Import[0][0];
         let ImportMaps = Import[0][1];
         let ImportImage = Import[0][2];
         console.log(ImportName, ImportMaps, ImportImage);
-        
-        let cupNames = LocalList("CupNames");
+
         cupNames.push(ImportName);
-        localStorage.setItem("CupNames", JSON.stringify(cupNames));
+        CupNames.set(JSON.stringify(cupNames));
 
-        let cupMaps = LocalList("CupMaps");
         cupMaps.push(ImportMaps);
-        localStorage.setItem("CupMaps", JSON.stringify(cupMaps));
+        CupMaps.set(JSON.stringify(cupMaps));
 
-        let cupImages = LocalList("CupImages");
         cupImages.push(ImportImage);
-        localStorage.setItem("CupImages", JSON.stringify(cupImages));
+        CupImages.set(JSON.stringify(cupImages));
 
-        window.location.reload();
+        // window.location.reload();
     }
     const MaxIndex = 2;
     let currentIndex = 0;
-    function cycleRight() {
-        if (currentIndex < MaxIndex) {
-            currentIndex++;
-            document.getElementById((currentIndex-1).toString()).style.display = "none";
-            document.getElementById(currentIndex.toString()).style.display = "block";
-        }
-        else {
-            currentIndex = 0;
-            document.getElementById(MaxIndex.toString()).style.display = "none";
-            document.getElementById(currentIndex.toString()).style.display = "block";
-        }
-    }
-    function cycleLeft() {
-        if (currentIndex > 0) {
-            currentIndex--;
-            document.getElementById((currentIndex+1).toString()).style.display = "none";
-            document.getElementById(currentIndex.toString()).style.display = "block";
-        }
-        else {
-            currentIndex = MaxIndex;
-            document.getElementById("0").style.display = "none";
-            document.getElementById(currentIndex.toString()).style.display = "block";
-        }
-    }
+    // later
+    // function cycleRight() {
+    //     if (currentIndex < MaxIndex) {
+    //         currentIndex++;
+    //         document.getElementById((currentIndex-1).toString()).style.display = "none";
+    //         document.getElementById(currentIndex.toString()).style.display = "block";
+    //     }
+    //     else {
+    //         currentIndex = 0;
+    //         document.getElementById(MaxIndex.toString()).style.display = "none";
+    //         document.getElementById(currentIndex.toString()).style.display = "block";
+    //     }
+    // }
+    // function cycleLeft() {
+    //     if (currentIndex > 0) {
+    //         currentIndex--;
+    //         document.getElementById((currentIndex+1).toString()).style.display = "none";
+    //         document.getElementById(currentIndex.toString()).style.display = "block";
+    //     }
+    //     else {
+    //         currentIndex = MaxIndex;
+    //         document.getElementById("0").style.display = "none";
+    //         document.getElementById(currentIndex.toString()).style.display = "block";
+    //     }
+    // }
+    let ImportCustomMap = "";
+    let ImportMapId = "";
     function ImportMap() {
-        let ImportMap = document.getElementById("ImportCustomMap").value;
-        let ImportMapId = document.getElementById("ImportMapId").value;
-        let CustomMaps = LocalList("CustomMaps");
-        CustomMaps.push({id: ImportMapId, map: ImportMap});
+        let CustomMaps = customMaps;
+        CustomMaps.push({id: ImportMapId, map: ImportCustomMap});
         console.log(CustomMaps)
-        localStorage.setItem("CustomMaps", JSON.stringify(CustomMaps));
+        CustomMaps.set(JSON.stringify(CustomMaps));
     }
-    console.log(JSON.parse(localStorage.getItem("CustomMaps")))
 
     let update = false;
     $: update = !update;
+    function clearAll() {
+        CustomMaps.set([]);
+        CupNames.set([]);
+        CupMaps.set([]);
+        CupImages.set([]);
+    }
 </script>
 
 <svelte:head>
@@ -121,11 +147,13 @@
     
     <title>Ice Dodo - UnOfficial Site</title>
     <link rel="icon" href="images/dodoloader.webp">
-    <meta name="description" content="Modded Ice Dodo by Onionfist.com">
+    <meta name="description" content="Modded Ice Dodo by Onionfist.com & Guy">
+    <!-- <link rel="preload" href={pixeled} as="font" crossorigin="anonymous" /> -->
     <style type="text/css" media="screen">
         @font-face {
             font-family: "pixeled";
-            src: url('./assets/fonts/pixeled.ttf');
+            /* src: url("$lib/assets/fonts/pixeled.ttf") format("truetype"); */
+            src: local(''), url('/fonts/pixeled.ttf') format('truetype');
         }
         * {
             box-sizing: border-box;
@@ -194,11 +222,11 @@
         <p style="margin: 2px;">Original Ice Dodo by <a href="https://onionfist.com">Onionfist/Jason</a></p>
         <p style="font-size:xx-small;margin:2px;">-</p>
         <p style="margin: 2px;">Dodoloader by Guy</p>
-        <button style="width:45%;" onclick="window.location.href='singleplayer'">Play Now</button>
+        <a style="width:45%;" href="/singleplayer">Play Now</a>
         <br>
-        <button onclick="localStorage.clear();window.location.reload()">Clear All Custom</button>
-        <img src="/assets/svgs/caret-right-fill.svg" id="rightArrow" class="arrow" style="float:right;margin-right:50px;" onclick="cycleRight()">
-        <img src="/assets/svgs/caret-left-fill.svg" id="leftArrow" class="arrow" style="float:left;margin-left:50px;" onclick="cycleLeft()">
+        <button on:click={clearAll}>Clear All Custom</button>
+        <!-- <img src="{left}" alt="left" id="rightArrow" class="arrow" style="float:right;margin-right:50px;" onclick="cycleRight()">
+        <img src="{right}" alt="right" id="leftArrow" class="arrow" style="float:left;margin-left:50px;" onclick="cycleLeft()"> -->
         <p style="font-size:xx-small;padding-bottom: 10px;">if game does not load you messed up the cups, clear them</p>
     </div>
     <div id="0">
@@ -213,13 +241,13 @@
             <input bind:files={image} type="file" accept="image/png" id="image">
             <p style="font-size: small;">Image for cup (PNG only)</p>
         </form>
-        <button onclick="SaveConfig()">Add Cup</button>
+        <button on:click={SaveConfig}>Add Cup</button>
         <br>
         <p>Export/Import</p>
         <input bind:value={CupExport} id="cupExport" type="number">
         <p style="font-size: small;">Number of cup you made</p>
-        <button id="export" style="margin-right:5px" onclick="exportCup()">Export</button>
-        <button id="import" onclick="importCup()">Import</button>
+        <button id="export" style="margin-right:5px" on:click={exportCup}>Export</button>
+        <button id="import" on:click={importCup}>Import</button>
         <br>
         <textarea style="color:black;font-size: xx-small;font-family: arial;" bind:value={ExportImport} id="exportimport"></textarea>
         <p>Custom Cups Added</p>
@@ -227,10 +255,10 @@
     <div id="1" style="display:none;">
         <h3>Custom Maps</h3>
         <p style="font-size: small;">Name Of Map</p>
-        <input id="ImportMapId" type="text">
+        <input id="ImportMapId" bind:value={ImportMapId} type="text">
         <p style="font-size: small;">Map Script</p>
-        <textarea style="color:black;font-size: xx-small;font-family: arial;" id="ImportCustomMap"></textarea>
-        <button id="importMap" onclick="ImportMap()">Import</button>
+        <textarea style="color:black;font-size: xx-small;font-family: arial;" id="ImportCustomMap" bind:value={ImportCustomMap}></textarea>
+        <button id="importMap" on:click={ImportMap}>Import</button>
     </div>
     <div id="2" style="display:none;">
         <h2>Tutorial</h2>
