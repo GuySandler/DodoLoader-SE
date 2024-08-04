@@ -1,4 +1,5 @@
 /* eslint-disable */
+import * as BABYLON from 'babylonjs';
 
 var change_state = {
 	die: function(deathMessage) {

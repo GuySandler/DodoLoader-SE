@@ -1,4 +1,5 @@
 /* eslint-disable */
+import * as BABYLON from 'babylonjs';
 
 const IS_ICEPARTY = false;
 

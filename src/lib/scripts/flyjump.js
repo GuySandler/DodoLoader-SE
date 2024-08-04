@@ -1,4 +1,5 @@
 /* eslint-disable */
+import * as BABYLON from 'babylonjs';
 
 var flyjump = {
 	can_jump: false,

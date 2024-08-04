@@ -1,5 +1,5 @@
 /* eslint-disable */
-
+import * as BABYLON from 'babylonjs';
 var boot = {
     didPreload: false,
     preload: async function() {

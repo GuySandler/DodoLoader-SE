@@ -3,11 +3,16 @@
     // import pixeled from '../lib/fonts/pixeled.ttf';
     import left from '$lib/assets/svgs/caret-left-fill.svg';
     import right from '$lib/assets/svgs/caret-right-fill.svg';
+    import logo from '$lib/images/dodoloader.webp';
 
+    // debug
+    function log(...args) {
+        console.log(...args);
+    }
     // function LocalList(name) {return JSON.parse(localStorage.getItem(name))}
     let name = "";
     let maps = "";
-    let image = "";
+    let image;
 
     let cupNames = [];
     CupNames.subscribe(value => {
@@ -44,14 +49,19 @@
 
         cupMaps.push(maps.replace(/\s/g, ""));
         CupMaps.set(JSON.stringify(cupMaps));
-
-        var reader = new FileReader();
-        reader.onload = function(){
-            var base64 = reader.result;
-            cupImages.push(base64);
-            CupImages.set(JSON.stringify(cupImages));
-        };
-        reader.readAsDataURL(image);
+        if (image) {
+            const reader = new FileReader();
+            reader.onload = function(){
+                const base64 = reader.result;
+                console.log(base64);
+                cupImages.push(base64);
+                CupImages.set(JSON.stringify(cupImages));
+            };
+            reader.readAsDataURL(image);
+            console.log(image);
+            console.log(reader.readAsDataURL(image));
+            
+        }
         // window.location.reload();
     }
 
@@ -146,7 +156,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Ice Dodo - UnOfficial Site</title>
-    <link rel="icon" href="images/dodoloader.webp">
+    <link rel="icon" href={logo}>
     <meta name="description" content="Modded Ice Dodo by Onionfist.com & Guy">
     <!-- <link rel="preload" href={pixeled} as="font" crossorigin="anonymous" /> -->
     <style type="text/css" media="screen">
@@ -238,7 +248,7 @@
             <input bind:value={maps} style="width:90%;margin-left:5%;margin-right:5%;font-family:arial;" type="text" id="maps">
             <p style="font-size:small;font-family:arial;">Maps for cup<br>make sure you type it like this example:<br>{'[{diff:1,id:"glass_walkway",name:"Glass Walkway"},{diff:1,id:"lucid_dreams",name:"Lucid Dreams"}]'}<br>the diff is the difficulty that map will show as</p>
             <br>
-            <input bind:files={image} type="file" accept="image/png" id="image">
+            <input on:change={e => image = e.target.files[0]} type="file" accept="image/png" id="image">
             <p style="font-size: small;">Image for cup (PNG only)</p>
         </form>
         <button on:click={SaveConfig}>Add Cup</button>

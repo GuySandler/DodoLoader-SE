@@ -1,3 +1,4 @@
+import * as BABYLON from 'babylonjs';
 //modloader auto generated (old interperter)
 const WEBSITE_URL = "https://icedodo.onionfist.com";
 const ALL_DIFFICULTIES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];

@@ -1,4 +1,5 @@
 /* eslint-disable */
+import * as BABYLON from 'babylonjs';
 
 var cleanup = {
 	run: function(full_reset=true) {

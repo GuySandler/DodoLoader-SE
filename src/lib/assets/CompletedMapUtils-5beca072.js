@@ -1,3 +1,4 @@
+import * as BABYLON from 'babylonjs';
 import {
     M as c,
     F as l,

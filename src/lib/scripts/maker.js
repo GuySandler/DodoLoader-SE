@@ -1,4 +1,5 @@
 /* eslint-disable */
+import * as BABYLON from 'babylonjs';
 let KILLER_BOUNCE = 999999
 var maker = {
     platform_count: 0,

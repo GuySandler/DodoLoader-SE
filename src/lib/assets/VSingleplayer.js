@@ -6,6 +6,7 @@ var __publicField = (obj, key, value) => {
 };
 import { M as MapUtils, F as FStorage, S as StorageKeyEnum, W as WEBSITE_URL, L as LATEST_MAP_CODE_VERSION, a as FINDER_MAX_RESULTS, U as ULTRAHARD_UNLOCK_AT_OVERALL_PERCENT, C as CupIdEnum, A as ALL_CUP_IDS, b as ALL_DIFFICULTIES, c as ALL_SKIN_IDS, d as SkinIdEnum, e as CupUtils, P as PageIdEnum, N as NewcomerUtils, f as UrlUtils, g as API_SERVER_URL, h as MiscUtils, i as CLOSE_BUTTON_TEXT, j as LinkEnum, k as StorageValueEnum, l as NEWCOMER_GRADUATE_AT_MAP_COMPLETION_COUNT, D as DeploymentUtils, m as ColorEnum, n as SoundFileEnum, R as RouteEnum, o as ALL_SOUND_FILE_PATHS, p as SettingsUtils, q as ArrayUtils, r as FGlobalManager, s as defineComponent, _ as _export_sfc, t as createElementBlock, u as createBaseVNode, v as createCommentVNode, w as createStaticVNode, x as openBlock, y as pushScopeId, z as popScopeId, B as MapPropertyUtils, E as toDisplayString, G as normalizeClass, H as Fragment, I as renderList, J as createVNode, K as resolveComponent, O as normalizeStyle, Q as RecentMapUtils, T as withDirectives, V as vModelText, X as withKeys, Y as QueryKeyEnum } from "./index.js";
 import {dodoCup} from "../dodoCup.js";
+import * as BABYLON from 'babylonjs';
 class CompletedMapUtils {
   static async getCompletionDictionary() {
     const mapCompletionDictionary = {};
