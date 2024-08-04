@@ -1,4 +1,7 @@
 import * as BABYLON from 'babylonjs';
+import { CupNames, CupMaps, CupImages, CustomMaps } from '../../stores.js';
+
+export function index() {
 //modloader auto generated (old interperter)
 const WEBSITE_URL = "https://icedodo.onionfist.com";
 const ALL_DIFFICULTIES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
@@ -8,9 +11,24 @@ const ULTRAHARD_UNLOCK_AT_OVERALL_PERCENT = 0.0;
 const FINDER_MAX_RESULTS = 100;
 const CLOSE_BUTTON_TEXT = "Close [X]";
 
-const Addcup = JSON.parse(localStorage.getItem("CupNames"))
+// const Addcup = JSON.parse(localStorage.getItem("CupNames"))
+let Addcup = [];
+CupNames.subscribe(value => {
+    // console.log(typeof value, value.length !== 0);
+    if (value.length !== 0) {
+        Addcup = JSON.parse(value);
+    }
+});
 
-let AddMapTocup = JSON.parse(localStorage.getItem("CupMaps"))
+// let AddMapTocup = JSON.parse(localStorage.getItem("CupMaps"))
+let AddMapTocup = [];
+CupMaps.subscribe(value => {
+    // console.log(typeof value, value.length !== 0);
+    if (value.length !== 0) {
+        AddMapTocup = JSON.parse(value);
+    }
+});
+
 function convertStringToArray(input) {
     const jsonString = `[${input}]`;
     const resultArray = JSON.parse(jsonString);
@@ -20,9 +38,14 @@ const inputString = AddMapTocup;
 const formattedInputString = inputString.toString().replace(/(\w+):/g, '"$1":');
 AddMapTocup = convertStringToArray(formattedInputString);
 
-const Addskin = JSON.parse(localStorage.getItem("CupImages"))
-
-
+// const Addskin = JSON.parse(localStorage.getItem("CupImages"))
+let Addskin = [];
+CupImages.subscribe(value => {
+    // console.log(typeof value, value.length !== 0);
+    if (value.length !== 0) {
+        Addskin = JSON.parse(value);
+    }
+});
 
 // DO NOT DELETE clear all lines above this one DO NOT DELETE
 var __defProp = Object.defineProperty;
@@ -6656,7 +6679,7 @@ function getRoutes() {
     },
     {
       path: RouteEnum.Singleplayer,
-      component: () => __vitePreload(() => import("./VSingleplayer.js"), true ? ["assets/VSingleplayer.js","assets/VSingleplayer.css"] : void 0)
+      component: () => __vitePreload(() => import("$lib/assets/VSingleplayer.js"), true ? ["$lib/assets/VSingleplayer.js","$lib/assets/VSingleplayer.css"] : void 0)
     }
   ];
   return websiteAndExtensionRoutes;
@@ -8492,58 +8515,58 @@ class FEntryManager {
 }
 void FEntryManager.init();
 window.sponsorManager = new FSponsorManager();
-// minified exports
-export {
-  ALL_CUP_IDS as A,
-  MapPropertyUtils as B,
-  CupIdEnum as C,
-  DeploymentUtils as D,
-  toDisplayString as E,
-  FStorage as F,
-  normalizeClass as G,
-  Fragment as H,
-  renderList as I,
-  createVNode as J,
-  resolveComponent as K,
-  LATEST_MAP_CODE_VERSION as L,
-  MapUtils as M,
-  NewcomerUtils as N,
-  normalizeStyle as O,
-  PageIdEnum as P,
-  RecentMapUtils as Q,
-  RouteEnum as R,
-  StorageKeyEnum as S,
-  withDirectives as T,
-  ULTRAHARD_UNLOCK_AT_OVERALL_PERCENT as U,
-  vModelText as V,
-  WEBSITE_URL as W,
-  withKeys as X,
-  QueryKeyEnum as Y,
-  _export_sfc as _,
-  FINDER_MAX_RESULTS as a,
-  ALL_DIFFICULTIES as b,
-  ALL_SKIN_IDS as c,
-  SkinIdEnum as d,
-  CupUtils as e,
-  UrlUtils as f,
-  API_SERVER_URL as g,
-  MiscUtils as h,
-  CLOSE_BUTTON_TEXT as i,
-  LinkEnum as j,
-  StorageValueEnum as k,
-  NEWCOMER_GRADUATE_AT_MAP_COMPLETION_COUNT as l,
-  ColorEnum as m,
-  SoundFileEnum as n,
-  ALL_SOUND_FILE_PATHS as o,
-  SettingsUtils as p,
-  ArrayUtils as q,
-  FGlobalManager as r,
-  defineComponent as s,
-  createElementBlock as t,
-  createBaseVNode as u,
-  createCommentVNode as v,
-  createStaticVNode as w,
-  openBlock as x,
-  pushScopeId as y,
-  popScopeId as z
+return [
+    ALL_CUP_IDS,
+    MapPropertyUtils,
+    CupIdEnum,
+    DeploymentUtils,
+    toDisplayString,
+    FStorage,
+    normalizeClass,
+    Fragment,
+    renderList,
+    createVNode,
+    resolveComponent,
+    LATEST_MAP_CODE_VERSION,
+    MapUtils,
+    NewcomerUtils,
+    normalizeStyle,
+    PageIdEnum,
+    RecentMapUtils,
+    RouteEnum,
+    StorageKeyEnum,
+    withDirectives,
+    ULTRAHARD_UNLOCK_AT_OVERALL_PERCENT,
+    vModelText,
+    WEBSITE_URL,
+    withKeys,
+    QueryKeyEnum,
+    _export_sfc,
+    FINDER_MAX_RESULTS,
+    ALL_DIFFICULTIES,
+    ALL_SKIN_IDS,
+    SkinIdEnum,
+    CupUtils,
+    UrlUtils,
+    API_SERVER_URL,
+    MiscUtils,
+    CLOSE_BUTTON_TEXT,
+    LinkEnum,
+    StorageValueEnum,
+    NEWCOMER_GRADUATE_AT_MAP_COMPLETION_COUNT,
+    ColorEnum,
+    SoundFileEnum,
+    ALL_SOUND_FILE_PATHS,
+    SettingsUtils,
+    ArrayUtils,
+    FGlobalManager,
+    defineComponent,
+    createElementBlock,
+    createBaseVNode,
+    createCommentVNode,
+    createStaticVNode,
+    openBlock,
+    pushScopeId,
+    popScopeId,
+];
 };

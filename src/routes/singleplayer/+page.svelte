@@ -2,18 +2,38 @@
     import { onMount } from 'svelte';
     import * as BABYLON from 'babylonjs';
     import validation from '$lib/assets/icons/validation.svg';
+    import logo from '$lib/images/dodoloader.webp';
 
+    import '$lib/assets/index.css';
+    import '$lib/assets/VSingleplayer.css';
+
+    // import "$lib/scripts/decorations.js";
+    // import "$lib/scripts/fov.js";
+    // import "$lib/scripts/change_state.js";
+    // import "$lib/scripts/maker.js";
+    // import "$lib/scripts/alias.js";
+    // import "$lib/scripts/const_controller.js";
+    // import "$lib/scripts/cleanup.js";
+    // import "$lib/scripts/start.js";
+    // import "$lib/scripts/update.js";
+    // import "$lib/scripts/flyjump.js";
+    // import "$lib/scripts/boot.js";
+
+    // import "$lib/dodoCup.js";
+
+    import { index } from "$lib/assets/index.js";
+
+    // let test
     // onMount(() => {
-    //     document.getElementById(".modmenuOption")?.style.display = "none";
-    //     document.getElementById(".LevelEditorOption")?.style.display = "none";
-    //     document.getElementById(".LevelEditorObjects")?.style.display = "none";
-    //     document.getElementById(".LevelEditorControl")?.style.display = "none";
-    //     document.getElementById(".LevelEditorAdd")?.style.display = "none";
-    //     document.getElementById("#cheats")?.style.display = "none";
-    //     document.getElementById("#gravitytoggle")?.style.display = "none";
-    //     document.getElementById("#speedtoggle")?.style.display = "none";
-    //     document.getElementById("#dodocontrols")?.style.display = "none";
-    // };
+        // importAll()
+        // import '$lib/assets/VSingleplayer.js';
+        // test = "hi"
+    // });
+    // function butti() {console.log(test)};
+    let [ALL_CUP_IDS,MapPropertyUtils,CupIdEnum,DeploymentUtils,toDisplayString,FStorage,normalizeClass,Fragment,renderList,createVNode,resolveComponent,LATEST_MAP_CODE_VERSION,MapUtils,NewcomerUtils,normalizeStyle,PageIdEnum,RecentMapUtils,RouteEnum,StorageKeyEnum,withDirectives,ULTRAHARD_UNLOCK_AT_OVERALL_PERCENT,vModelText,WEBSITE_URL,withKeys,QueryKeyEnum,_export_sfc,FINDER_MAX_RESULTS,ALL_DIFFICULTIES,ALL_SKIN_IDS,SkinIdEnum,CupUtils,UrlUtils,API_SERVER_URL,MiscUtils,CLOSE_BUTTON_TEXT,LinkEnum,StorageValueEnum,NEWCOMER_GRADUATE_AT_MAP_COMPLETION_COUNT,ColorEnum,SoundFileEnum,ALL_SOUND_FILE_PATHS,SettingsUtils,ArrayUtils,FGlobalManager,defineComponent,createElementBlock,createBaseVNode,createCommentVNode,createStaticVNode,openBlock,pushScopeId,popScopeId];
+    onMount(() => {
+        let [ALL_CUP_IDS,MapPropertyUtils,CupIdEnum,DeploymentUtils,toDisplayString,FStorage,normalizeClass,Fragment,renderList,createVNode,resolveComponent,LATEST_MAP_CODE_VERSION,MapUtils,NewcomerUtils,normalizeStyle,PageIdEnum,RecentMapUtils,RouteEnum,StorageKeyEnum,withDirectives,ULTRAHARD_UNLOCK_AT_OVERALL_PERCENT,vModelText,WEBSITE_URL,withKeys,QueryKeyEnum,_export_sfc,FINDER_MAX_RESULTS,ALL_DIFFICULTIES,ALL_SKIN_IDS,SkinIdEnum,CupUtils,UrlUtils,API_SERVER_URL,MiscUtils,CLOSE_BUTTON_TEXT,LinkEnum,StorageValueEnum,NEWCOMER_GRADUATE_AT_MAP_COMPLETION_COUNT,ColorEnum,SoundFileEnum,ALL_SOUND_FILE_PATHS,SettingsUtils,ArrayUtils,FGlobalManager,defineComponent,createElementBlock,createBaseVNode,createCommentVNode,createStaticVNode,openBlock,pushScopeId,popScopeId,] = index();
+    })
 
     let modmenu = false;
     let LevelEditor = false;
@@ -436,10 +456,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Ice Dodo - UnOfficial Site</title>
-    <link rel="icon" href="/assets/icons/icon.png">
+    <link rel="icon" href={logo}>
     <meta name="description" content="Play hundreds of 3D Ice dodo levels. Do not fall off or touch spikes.">
 
-    <link rel="stylesheet" href="/assets/index.css">
+    <!-- <link rel="stylesheet" href="/assets/index.css"> -->
     <style>
         .button {
             margin-bottom:5px;
@@ -465,20 +485,6 @@
             margin: 2px;
         }
     </style>
-    <!-- <script type="module" src="$lib/assets/index.js"></script>
-    <script type="module" src="$lib/assets/dodoCup.js"></script> -->
-    <!-- <script type="text/javascript" src="$lib/scripts/decorations.js"></script> -->
-    <!-- <script type="text/javascript" src="$lib/scripts/fov.js"></script>
-    <script type="text/javascript" src="$lib/scripts/change_state.js"></script>
-    <script type="text/javascript" src="$lib/scripts/maker.js"></script>
-    <script type="text/javascript" src="$lib/scripts/alias.js"></script>
-    <script type="text/javascript" src="$lib/scripts/const_controller.js"></script>
-    <script type="text/javascript" src="$lib/scripts/cleanup.js"></script>
-    <script type="text/javascript" src="$lib/scripts/start.js"></script>
-    <script type="text/javascript" src="$lib/scripts/update.js"></script>
-    <script type="text/javascript" src="$lib/scripts/flyjump.js"></script>
-    <script type="text/javascript" src="$lib/scripts/boot.js"></script> -->
-
 </svelte:head>
 <div id="appContainer">
     <div id="app"></div>
